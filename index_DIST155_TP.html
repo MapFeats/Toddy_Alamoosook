@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+
+:root {
+
+  --col2W: 1px;
+  --col3W: 1px;
+  --pageW: 1px;
+}
+
+
+
+.container {
+  display: grid;
+  grid-template-columns: var(--col2W) var(--col3W);
+  width: var(--pageW);
+
+  background-color: red;
+  padding: 1px;
+}
+.container > div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: right;
+}
+</style>
+
+
+<script>
+function TP(sw) {
+  var pic;
+  if (sw == 0) {
+    pic = "tp_dist155/TP1_dist155.jpg"
+  }  
+  else if (sw == 1) {
+    pic = "tp_dist155/TP2_dist155.jpg"
+  } 
+  else if (sw ==  2) {
+    pic = "tp_dist155/TP3_dist155.jpg"
+  } 
+   else {
+    pic = "tp_dist155/TP4_dist155.jpg"
+  }
+
+  document.getElementById('TP_DIST155').src = pic;
+}
+
+function imgSize() {
+
+  var r = document.querySelector(':root');
+  varRStyles = getComputedStyle(r);
+
+
+  let height = screen.height;
+  if (height == 1080) {
+    document.getElementById("TP_DIST155").style.width = "1326px"; 
+    document.getElementById("TP_DIST155").style.height = "858px"; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', '1356px');
+    r.style.setProperty('--pageW', '1456px'); 
+  } else if (height == 720) {
+    document.getElementById("TP_DIST155").style.width = "790px"; 
+    document.getElementById("TP_DIST155").style.height = "511px"; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', '820px');
+    r.style.setProperty('--pageW', '920px'); 
+
+  } else {
+    let dif = height - 720;
+    let h = 511 + dif;
+    let w = 790 + dif;
+    let newH = h + 'px';
+    let newW = w + 'px';
+    let c3W = (w + 30) + 'px';
+    let pgW = (100 + w + 30) + 'px';
+    document.getElementById("TP_DIST155").style.width = newW; 
+    document.getElementById("TP_DIST155").style.height = newH; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', c3W);
+    r.style.setProperty('--pageW', pgW); 
+  } 
+}
+function zoomIn() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  if (currentZoom < 3) {
+    zoomableElement.style.zoom = (currentZoom + 0.1).toFixed(1);
+  }
+}
+function zoomOut() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  if (currentZoom > 0.5) {
+    zoomableElement.style.zoom = (currentZoom - 0.1).toFixed(1);
+  }
+}
+
+ function zoom100() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  zoomableElement.style.zoom = "100%";
+ }
+
+
+
+</script>
+
+</head>
+<body onload = "imgSize()">
+
+<div class="container" id="page">
+   <div>
+   <p style="color: blue; font-size: 16px; text-align: center; margin-top: 10px; margin-bottom: 0px;  
+        padding-bottom: 0px;" >Distance to Toddy Pond Shoreline after 8 ft Drop</p>
+
+
+   <p style="text-align: right; margin-top: 0px; margin-bottom: 5px; padding-top: 0px;  " >
+     <button type="button" onclick="TP(0)">North</button>
+     <br>
+     <button type="button" onclick="TP(1)">North/Mid</button>
+     <br>
+     <button type="button" onclick="TP(2)">Mid/South</button>
+     <br>
+     <button type="button" onclick="TP(3)">South</button>
+    </p>
+   <br>
+    <p style="color: blue; font-size: 16px; text-align: center; margin-top: 10px; margin-bottom: 0px;
+        margin-left: 0px; padding-bottom: 0px;" >Zoom Page</p>
+
+     <button type="button" onclick="zoomIn()">+10%</button>
+     <br>
+     <button type="button" onclick="zoomOut()">-10%</button>
+     <br>
+     <button type="button" onclick="zoom100()">100%</button>
+    </p>
+
+
+  </div>
+  <div><img id="TP_DIST155" src="tp_dist155/TP1_dist155.jpg" alt="Toddy Pond Distance"></div>  
+</div>
+
+</body>
+</html>
+
+
+

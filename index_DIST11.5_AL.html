@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+
+:root {
+
+  --col2W: 1px;
+  --col3W: 1px;
+  --pageW: 1px;
+}
+
+
+
+.container {
+  display: grid;
+  grid-template-columns: var(--col2W) var(--col3W);
+  width: var(--pageW);
+
+  background-color: red;
+  padding: 1px;
+}
+.container > div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: right;
+}
+</style>
+
+
+<script>
+
+ function imgSize() {
+
+  var r = document.querySelector(':root');
+  varRStyles = getComputedStyle(r);
+
+
+  let height = screen.height;
+  if (height == 1080) {
+    document.getElementById("AL_DIST11.5").style.width = "663px"; 
+    document.getElementById("AL_DIST11.5").style.height = "867px"; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', '693px');
+    r.style.setProperty('--pageW', '793px'); 
+  } 
+else if (height == 720) {
+    document.getElementById("AL_DIST11.5").style.width = "390px"; 
+    document.getElementById("AL_DIST11.5").style.height = "510px"; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', '410px');
+    r.style.setProperty('--pageW', '510px'); 
+
+  } 
+else {
+    let dif = height - 720;
+    let h = 510 + dif;
+    let w = 390 + dif;
+    let newH = h + 'px';
+    let newW = w + 'px';
+    let c3W = (w + 30) + 'px';
+    let pgW = (100 + w + 30) + 'px';
+    document.getElementById("AL_DIST11.5").style.width = newW; 
+    document.getElementById("AL_DIST11.5").style.height = newH; 
+
+    r.style.setProperty('--col2W', '100px');
+    r.style.setProperty('--col3W', c3W);
+    r.style.setProperty('--pageW', pgW); 
+  } 
+}
+function zoomIn() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  if (currentZoom < 3) {
+    zoomableElement.style.zoom = (currentZoom + 0.1).toFixed(1);
+  }
+}
+function zoomOut() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  if (currentZoom > 0.5) {
+    zoomableElement.style.zoom = (currentZoom - 0.1).toFixed(1);
+  }
+}
+
+ function zoom100() {
+  const zoomableElement = document.getElementById('page');
+  let currentZoom = parseFloat(getComputedStyle(zoomableElement).zoom);
+  zoomableElement.style.zoom = "100%";
+ }
+
+
+
+</script>
+
+</head>
+<body onload = "imgSize()">
+
+<div class="container" id="page">
+   <div>
+   <p style="color: blue; font-size: 16px; text-align: center; margin-top: 10px; margin-bottom: 0px;  
+        padding-bottom: 0px;" >Distance to Alamoosook Lake Shoreline after 8 ft Drop</p>
+
+   <br>
+    <p style="color: blue; font-size: 16px; text-align: center; margin-top: 10px; margin-bottom: 0px;
+        margin-left: 0px; padding-bottom: 0px;" >Zoom Page</p>
+
+     <button type="button" onclick="zoomIn()">+10%</button>
+     <br>
+     <button type="button" onclick="zoomOut()">-10%</button>
+     <br>
+     <button type="button" onclick="zoom100()">100%</button>
+    </p>
+
+
+  </div>
+  <div><img id="AL_DIST11.5" src="al_dist_11.5/AL_DIST_11.5.jpg" alt="Alamoosook Lake Distance"></div>  
+</div>
+
+</body>
+</html>
+
+
+
